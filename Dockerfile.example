@@ -1,0 +1,24 @@
+# Generic Dockerfile for all things Golang.
+# Check Makefile for how to run
+
+ARG PLATFORM
+FROM reecerose/health-check:$PLATFORM as health-check
+
+# Note, need to specify amd64 as arm64 cannot fetch upx package
+FROM --platform=amd64 golang:1.18.1-alpine3.15 AS builder
+ARG PLATFORM
+
+WORKDIR /app
+COPY . .
+RUN apk update \
+  && apk add upx
+
+RUN GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=$PLATFORM go build -ldflags "-s -w" -o build/example main.go
+RUN upx -4 build/example
+RUN mv build/example /service
+
+FROM scratch
+COPY --from=health-check /health-check /
+COPY --from=builder /service /
+EXPOSE 80
+ENTRYPOINT ["/service"]
