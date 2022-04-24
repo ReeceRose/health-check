@@ -2,7 +2,7 @@
 # Check Makefile for how to run
 
 ARG PLATFORM
-FROM reecerose/health-check:$PLATFORM as health-check
+FROM --platform=$PLATFORM reecerose/health-check:latest as health-check
 
 # Note, need to specify amd64 as arm64 cannot fetch upx package
 FROM --platform=amd64 golang:1.18.1-alpine3.15 AS builder

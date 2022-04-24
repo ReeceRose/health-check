@@ -25,7 +25,7 @@ By default, this will make an HTTP request to `http://localhost:80/health` but t
 
 The program accepts any status code between 200-299.
 
-Simply replace `amd64` with your desired supported platform. View `Dockerfile.example` for a more full Golang example.
+If you do not pass a platform arch to your container, just update that and replace it with your desired supported platform.
 
 ## Environment Variables
 
@@ -38,4 +38,4 @@ Simply replace `amd64` with your desired supported platform. View `Dockerfile.ex
 
 ## Supported platforms
 
-Currently, there are images for `amd64` and `arm64`. If you would like additional support, build the container via `make PLATFORM=<platform>`. This should provide you with a cross compiled container of your platform choice.
+Currently, there are images for `amd64` and `arm64`. If you would like additional support, build the container via `make PLATFORM=<platform> build`. This should provide you with a cross compiled container of your platform choice.
