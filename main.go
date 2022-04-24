@@ -7,12 +7,12 @@ import (
 )
 
 func main() {
-	_, err := http.Get(fmt.Sprintf("%s://%s:%s/%s",
+	res, err := http.Get(fmt.Sprintf("%s://%s:%s/%s",
 		getEnvironmentVariable("HEALTH_CHECK_HTTP", "http"),
 		getEnvironmentVariable("HEALTH_CHECK_HTTP_BASE_URL", "localhost"),
 		getEnvironmentVariable("HEALTH_CHECK_HTTP_PORT", "80"),
 		getEnvironmentVariable("HEALTH_CHECK_HTTP_ROUTE", "health")))
-	if err != nil {
+	if err != nil || (res.StatusCode < 200 || res.StatusCode > 299) {
 		os.Exit(1)
 	}
 }

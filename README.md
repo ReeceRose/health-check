@@ -23,6 +23,8 @@ HEALTHCHECK --interval=60s --timeout=5s --start-period=10s --retries=1 CMD [ "/h
 
 By default, this will make an HTTP request to `http://localhost:80/health` but this can me modified using [environment variables](# Environment Variables).
 
+The program accepts any status code between 200-299.
+
 Simply replace `amd64` with your desired supported platform. View `Dockerfile.example` for a more full Golang example.
 
 ## Environment Variables
