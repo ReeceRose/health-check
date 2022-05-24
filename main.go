@@ -13,6 +13,7 @@ func main() {
 		getEnvironmentVariable("HEALTH_CHECK_HTTP_PORT", "80"),
 		getEnvironmentVariable("HEALTH_CHECK_HTTP_ROUTE", "health")))
 	if err != nil || (res.StatusCode < 200 || res.StatusCode > 299) {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }
