@@ -1,3 +1,3 @@
 module github.com/reecerose/health-check
 
-go 1.18
+go 1.21
